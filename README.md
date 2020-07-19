@@ -1,7 +1,9 @@
-#Visualizing total and daily case trends of COVID-19 cases in Florida
+
+
+# Visualizing total and daily case trends of COVID-19 cases in Florida
 Author: Tatyana Zamkovaya
 
-##Download data
+## Download data
 To visualize these trends, data was first downloaded or manually curated.
 The case trends were created by using the Florida Department of Health (FDOH) dataset which includes the state's COVID-19 cases and deaths (which includes the gender, age, age group of each case) per county from March 10 to July 15.
 [accessed here:](https://open-fdoh.hub.arcgis.com/datasets/florida-covid19-case-line-data)
@@ -23,7 +25,7 @@ A dataframe `fl_county_mask_date_df` of counties and whether or not they current
 A dataframe `fl_covid_data_f` of just the gender, age, and age group trends per day per County (removing all other information) and adding a new column (num_case) with 1 added to each entry was then used to visualize daily trends per County and again is available here in .RData format.
 
 
-## Import necessary libraries and Load data
+## Import necessary libraries/data
 ```r 
 library(data.table)
 library(dplyr)
@@ -47,7 +49,7 @@ load("counties2.RData")
 load("fl_covid_data_f.RData")
 
 ````
-## Visualize Map of the Total Cases per County, including mask ordinance information
+## Map of the Total Cases per County, including mask ordinance information
 I wanted to see which counties had the highest number of total COVID-19 cases and wanted to also visualize which counties currently had mask orders enforced.
 
 ![florida_covid_map](https://github.com/tatyanazam/FL_covid_vis/blob/master/total_case_map.png)
@@ -83,7 +85,7 @@ ggplot() + geom_sf(data = counties2_v2_w_masks,
          color=guide_legend(title="Mandatory Mask Order"))
          
 ```
-## Visualize Daily Case Numbers Per County from March to July
+## Daily Case Numbers Per County from March to July
 For each day, for each county that did not record any cases, I first added an entry of 0 to the `num_case` column in `fl_covid_data_f` dataframe. 
 Then, I used `geom_tile` from ``ggplot2` to visualize changes in daily case numbers for all Florida counties.
 
@@ -140,11 +142,12 @@ ggplot(full_case_counts_df[full_case_counts_df$County != "Unknown County",],
  labs(fill="Total Daily Cases")
 ```
 
-## Visualize Change in Age Group Distribution in Cases per County from March to July
+## Change in Age Group Distribution in Cases per County from March to July
+
 Focusing on the top 10 counties with the highest number of COVID-19 cases, I wanted to see whether or not a change in age group distribution occurred in daily cases. 
 Barplots, colored by age group, would help indicate whether cases were evenly distributed among age groups or not and evaluating the age group distribution over time would help determine which age groups are most affected, and at which time points, for each Florida county.
 
-![age_group_change_top_10_counties](https://github.com/tatyanazam /FL_covid_vis/blob/master/Change_in_age_group_dist_of_cases_for_top10covidcounties.png)
+![age_group_change_top_10_counties](https://github.com/tatyanazam/FL_covid_vis/blob/master/Change_in_age_group_dist_of_cases_for_top10covidcounties.png)
 
 As can be seen from the plot, as time has gone by, a higher proportion of cases is being recorded among younger age groups, particularly among 15-44 year olds.
 Though the elderly population were most heavily affected by coronavirus in countries like Italy and China, this does not appear to be the case (in terms of positive case distributions) in Florida, despite the high retiree population and high number of nursing homes. Instead, residents aged 15-54 are testing positive the most, particularly in June/July. 
@@ -168,7 +171,7 @@ ggplot(fl_covid_data_f[fl_covid_data_f$County %in% top10_counties,],
 ```
 
 
-##Visualize Change in Age Group Distribution per County just for dates in July
+## Change in Age Group Distribution per County just for dates in July
 
 To more clearly see the change in age group distribution for these top 10 COVID-19 Florida counties, I focused on the last 15 days (July 1-July 15)
 
