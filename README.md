@@ -47,13 +47,13 @@ load("counties2.RData")
 load("fl_covid_data_f.RData")
 
 ````
-## Visualize Map of the total cases per County, including mask ordinance information
+## Visualize Map of the Total Cases per County, including mask ordinance information
 I wanted to see which counties had the highest number of total COVID-19 cases and wanted to also visualize which counties currently had mask orders enforced.
 
 ![florida_covid_map](https://github.com/tatyanazam/FL_covid_vis/blob/master/total_case_map.png)
 
 Although Miami clearly stands out as being heavily hit by COVID-19 cases, even the lighter shaded counties all have a high total case count (10000 and above). 
-Additionally, lthough the most heavily hit regions currently enforce masks, most counties (46 out of 67) currently do not have mandatory mask orders. Some counties, like Hillsborough and Pinellas only started enforcing masks beginning on June 24th. These counties, though not quite as high as Miami, are still quite heavily hit and potentially could've had reduced total cases if masks were enforced sooner. 
+Additionally, though the most heavily hit regions currently enforce masks, most counties (46 out of 67) currently do not have mandatory mask orders. Some counties, like Hillsborough and Pinellas only started enforcing masks beginning on June 24th. These counties, though not quite as high as Miami, are still quite heavily hit and potentially could've had reduced total cases if masks were enforced sooner. 
 While masks are encouraged by all counties, mandatory mask orders are needed to reduce risk of COVID-19 throughout Florida. 
 
 ```r 
@@ -84,13 +84,14 @@ ggplot() + geom_sf(data = counties2_v2_w_masks,
          
 ```
 ## Visualize Daily Case Numbers Per County from March to July
-For each day, for each County that did not record any cases, I first added an entry of 0 to the `num_case` column in `fl_covid_data_f` dataframe. 
-Then, I used `geom_tile` from ``ggplot2` to visualize changes in daily case numbers for all Florida Counties.
+For each day, for each county that did not record any cases, I first added an entry of 0 to the `num_case` column in `fl_covid_data_f` dataframe. 
+Then, I used `geom_tile` from ``ggplot2` to visualize changes in daily case numbers for all Florida counties.
+
+![county_daily_case_change](https://github.com/tatyanazam/FL_covid_vis/blob/master/case_count_per_day.png)  
+
 The y-axis shows Florida counties (listed alphabetically) and x-axis shows from left to right the change over time in days from March 10 to July 15. 
 
 Visualizing changes in daily cases numbers shows that Miami, Hillsborough, and Broward have particularly seen a rise in case numbers and that overall, most counties are experiencing a dramatic rise in case numbers, with up to 1000-2000 cases recorded per day since July. 
-
-![county_daily_case_change](https://github.com/tatyanazam/FL_covid_vis/blob/master/case_count_per_day.png)  
 
 ``` r
 full_counts_per_date_l <- lapply(unique(fl_covid_data_f$date), function(date_c){
@@ -143,7 +144,7 @@ ggplot(full_case_counts_df[full_case_counts_df$County != "Unknown County",],
 Focusing on the top 10 counties with the highest number of COVID-19 cases, I wanted to see whether or not a change in age group distribution occurred in daily cases. 
 Barplots, colored by age group, would help indicate whether cases were evenly distributed among age groups or not and evaluating the age group distribution over time would help determine which age groups are most affected, and at which time points, for each Florida county.
 
-![age_group_change_per_day_for_top_10_counties](https://github.com/tatyanazam /FL_covid_vis/blob/master/Change_in_age_group_dist_of_cases_for_top10covidcounties.png)
+![age_group_change_top_10_counties](https://github.com/tatyanazam /FL_covid_vis/blob/master/Change_in_age_group_dist_of_cases_for_top10covidcounties.png)
 
 As can be seen from the plot, as time has gone by, a higher proportion of cases is being recorded among younger age groups, particularly among 15-44 year olds.
 Though the elderly population were most heavily affected by coronavirus in countries like Italy and China, this does not appear to be the case (in terms of positive case distributions) in Florida, despite the high retiree population and high number of nursing homes. Instead, residents aged 15-54 are testing positive the most, particularly in June/July. 
@@ -166,11 +167,12 @@ ggplot(fl_covid_data_f[fl_covid_data_f$County %in% top10_counties,],
   coord_flip() + labs(fill="Age Group")
 ```
 
+
 ##Visualize Change in Age Group Distribution per County just for dates in July
+
 To more clearly see the change in age group distribution for these top 10 COVID-19 Florida counties, I focused on the last 15 days (July 1-July 15)
 
 ![age_group_change_july](https://github.com/tatyanazam/FL_covid_vis/blob/master/just_july_dates_age_dist_changes.png)
-
 
 ``` r
 last_15_dates <- (levels(unique(as.factor((fl_covid_data_f$date)))))[121:135] #actually last 15 - all july dates
@@ -189,6 +191,7 @@ ggplot(fl_covid_data_f[fl_covid_data_f$County %in% top10_counties &
                                      panel.background = element_blank()) + 
   coord_flip() + labs(fill="Age Group")
 ```
+
 To recreate these plots or to further explore Florida coronavirus data, feel free to use and expand upon the data and code here.
 
 
