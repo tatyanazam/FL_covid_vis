@@ -3,7 +3,7 @@
 # Visualizing total and daily case trends of COVID-19 cases in Florida
 Author: Tatyana Zamkovaya
 
-## Download data
+## Data Sources
 To visualize these trends, data was first downloaded or manually curated.
 The case trends were created by using the Florida Department of Health (FDOH) dataset which includes the state's COVID-19 cases and deaths (which includes the gender, age, age group of each case) per county from March 10 to July 15.
 [accessed here](https://open-fdoh.hub.arcgis.com/datasets/florida-covid19-case-line-data)
@@ -24,25 +24,6 @@ counties2 <- counties %>% separate(ID, c("state", "county"), sep=",")
 A dataframe `fl_county_mask_date_df` of counties and whether or not they currently have mandatory mask ordinances enforced was also created and can be downloaded here in .RData format. 
 A dataframe `fl_covid_data_f` of just the gender, age, and age group trends per day per County (removing all other information) and adding a new column (num_case) with 1 added to each entry was then used to visualize daily trends per County and again is available here in .RData format.
 
-
-## Import necessary libraries/data
-```r 
-library(data.table)
-library(dplyr)
-library(tidyverse)
-library(ggplot2) 
-library(tmap)
-library(sf)
-library(raster)
-library(spData)
-library(usmap) #to get back initial data on florida county coordinates
-devtools::install_github("UrbanInstitute/urbnmapr")
-library(urbnmapr) #for easier plotting of florida map
-library(tigris) #for easier plotting of florida map
-library(ggsn)
-library(RColorBrewer)
-library(viridis)
-``` 
 ## Map of the Total Cases per County, including mask ordinance information
 I wanted to see which counties had the highest number of total COVID-19 cases and wanted to also visualize which counties currently had mask orders enforced.
 
