@@ -8,7 +8,7 @@ To visualize these trends, data was first downloaded or manually curated.
 The case trends were created by using the Florida Department of Health (FDOH) dataset which includes the state's COVID-19 cases and deaths (which includes the gender, age, age group of each case) per county from March 10 to July 15.
 [accessed here](https://open-fdoh.hub.arcgis.com/datasets/florida-covid19-case-line-data)
 
-The dataframe of these trends is called `flcovid_mask_df` and can be downloaded here in .RData format.
+The dataframe of these trends is called `flcovid_data` and can be downloaded here in .RData format.
 
 To visualize florida counties as a map, county coordinates were retrieved and stored as a separate dataframe (`counties2.RData`) using the following code:
 ```r 
